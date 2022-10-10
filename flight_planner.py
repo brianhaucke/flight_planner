@@ -6,12 +6,18 @@ logo = """          ******************************************************
 
 spacer = "******************************************"
 
+passengers = 0
+depart_num = 0
+arrive_num = 0
+# Choose checking bags
+bag_check = False
+check_bags = 0
+
 print(logo)
 print("Welcome to Python Air, with non-stop service to 6 different big cities!")
 print(spacer)
 
 #How many passengers
-passengers = 0
 while passengers == 0:
     try:
         passengers = int(input("How many passengers: "))
@@ -20,7 +26,6 @@ while passengers == 0:
 
 # Choose a Departure City
 depart = input("Please enter the first letter of your departure city: (S)eattle, (D)allas, (L)os Angeles, (N)ew York, (M)iami, (C)hicago: ").lower()
-depart_num = 0
 if depart == "s":
     depart_num = 1
     depart_name = "Seattle"
@@ -45,8 +50,6 @@ else:
 
 # Choose an arrival City
 arrive = input("Please enter the first letter of your arrival city: (S)eattle, (D)allas, (L)os Angeles, (N)ew York, (M)iami, (C)hicago: ").lower()
-# def arrival(arrive):
-arrive_num = 0
 if arrive == depart:
     print("Error: Arrival and Destination are the same city. Please try again.")
     quit()
@@ -76,17 +79,12 @@ else:
 level = input("Would you like to fly First Class, Business Class, or Economy Class (Type F, B, or E): ").lower()
 
 # Choose checking bags
-bag_check = False
-check_bags = 0
-# while check_bags == 0:
 while bag_check == False:
     try:
         check_bags = int(input("How many bags will you be checking: "))
         bag_check = True
     except ValueError:
         print("Your input was not a valid number")
-
-
 
 # flight planner function -> calculates the cost of the flight, plus any bag charges and upgrades
 def flight_planner(passengers, depart_num, arrive_num, level, check_bags):
@@ -101,9 +99,7 @@ def flight_planner(passengers, depart_num, arrive_num, level, check_bags):
     elif level == "b":
         class_charge = 90
         level_name = "Business"
-    # if depart_num == arrive_num:
-    #     print("Departure and arrival city are the same, please try again")
-    #     quit()
+
     da_total = depart_num + arrive_num
     if da_total == 3:
         flight_cost = 150
@@ -142,8 +138,6 @@ def flight_planner(passengers, depart_num, arrive_num, level, check_bags):
     # Calculate everything
     total_cost = (flight_cost * passengers) + (class_charge * passengers) + total_bag_fee
     # Print out the total cost
-
-
     print("Your total cost (before taxes) is: $" + str(total_cost))
     print(spacer)
 
